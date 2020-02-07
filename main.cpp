@@ -2,6 +2,7 @@
 
 using namespace std;
 
+// A generic data class that could be anything
 class Data {
 	private:
 		int data;
@@ -11,10 +12,12 @@ class Data {
 		const int get();
 };
 
+// Data implementation
 Data::Data() : data(-1) {}
 Data::Data(const int data): data(data) {}
 const int Data::get() { return this->data; }
 
+// A node class part of a CLL
 class Node {
 	private:
 		Data * data;
@@ -31,6 +34,7 @@ class Node {
 		friend ostream& operator<< (ostream&, const Node&);
 };
 
+// Node implementation
 Node::Node() : data(NULL), next(NULL) {}
 Node::Node(Data& data): data(&data), next(NULL) {}
 Node::~Node() { if(data) delete data; }
@@ -44,6 +48,7 @@ ostream& operator<< (ostream& buffer, const Node& src) {
 	return buffer;
 }
 
+// A toy circularly linked list... but something's off...
 class CLL {
 	private:
 		Node* rear;
@@ -99,6 +104,7 @@ Node* CLL::dequeue(Node* curr) {
 	return dequeue(curr->get_next());
 }
 
+// An iterative solution, but what would the recursive version look like?
 void CLL::remove_all() { while(rear) dequeue(); }
 
 ostream& operator<< (ostream& buffer, const CLL& src) {
