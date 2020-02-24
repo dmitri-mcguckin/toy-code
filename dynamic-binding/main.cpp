@@ -123,7 +123,17 @@ void good_copy_list(const int size, Animal** src, Animal**& dest) {
 
   dest = new Animal*[size];
   for(int i = 0; i < size; ++i){
-    dest[i] = NULL;
+    Dog* t1 = dynamic_cast<Dog*>(src[i]);
+    if(t1) {
+        dest[i] = new Dog(*t1);
+        continue;
+    }
+
+    Fish* t2 = dynamic_cast<Fish*>(src[i]);
+    if(t2) {
+      dest[i] = new Fish(*t2);
+      continue;
+    }
   }
 }
 
@@ -148,8 +158,8 @@ int main() {
   src_animals[2] = new Fish("Marlin", 2);
 
   // Copy the list
-  bad_copy_list(size, src_animals, dest_animals); // THe shallow (bad) copy
-  // good_copy_list(size, src_animals, dest_animals); // The deep (good) copy
+  // bad_copy_list(size, src_animals, dest_animals); // The shallow (bad) copy
+  good_copy_list(size, src_animals, dest_animals); // The deep (good) copy
 
   // Display things
   cout << "Source:" << endl;
