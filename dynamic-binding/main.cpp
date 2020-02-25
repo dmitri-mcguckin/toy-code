@@ -23,16 +23,17 @@ Animal::Animal(const int legs, const char* name) : legs(legs) {
   strcpy(this->name, name);
 }
 
-Animal::Animal(const Animal& src) : legs(src.legs) {
+Animal::Animal(const Animal& src) {
   if(this == &src) return;
 
+  legs = src.legs;
   if(name) delete name;
   name = new char[strlen(src.name) + 1];
-  strcpy(name, src.name);
+  strcpy(this->name, src.name);
 }
 
 Animal::~Animal() {
-  if(name) delete name;
+  if(name) delete [] name;
 }
 
 class Dog : public Animal {
@@ -57,13 +58,13 @@ Dog::Dog(const int legs, const char* name, const char* tail) : Animal(legs, name
 Dog::Dog(const Dog& src) : Animal(src) {
   if(this == &src) return;
 
-  if(tail) delete tail;
+  if(tail) delete [] tail;
   tail = new char[strlen(src.tail) + 1];
   strcpy(this->tail, src.tail);
 }
 
 Dog::~Dog() {
-  if(tail) delete tail;
+  if(tail) delete [] tail;
 }
 
 void Dog::display() const {
@@ -122,7 +123,7 @@ void good_copy_list(const int size, Animal** src, Animal**& dest) {
   if(!src) return;
 
   dest = new Animal*[size];
-  for(int i = 0; i < size; ++i){
+  for(int i = 0; i < size; ++i) {
     Dog* t1 = dynamic_cast<Dog*>(src[i]);
     if(t1) {
         dest[i] = new Dog(*t1);
@@ -134,6 +135,8 @@ void good_copy_list(const int size, Animal** src, Animal**& dest) {
       dest[i] = new Fish(*t2);
       continue;
     }
+
+	if(!t1 && !t2) dest[i] = NULL;
   }
 }
 
@@ -158,7 +161,7 @@ int main() {
   src_animals[2] = new Fish("Marlin", 2);
 
   // Copy the list
-  // bad_copy_list(size, src_animals, dest_animals); // The shallow (bad) copy
+  //bad_copy_list(size, src_animals, dest_animals); // The shallow (bad) copy
   good_copy_list(size, src_animals, dest_animals); // The deep (good) copy
 
   // Display things
