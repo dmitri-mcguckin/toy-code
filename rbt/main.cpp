@@ -13,7 +13,7 @@ void print_menu() {
 
 int main(int argc, char** argv) {
 	bool running = true;
-	CLL list;
+	RedBlackTree list;
 
 	while(running) {
 		char option;
@@ -23,21 +23,21 @@ int main(int argc, char** argv) {
 
 		switch(option) {
 			case '1':
-				int number;
-				cout << "Enter a number: ";
-				cin >> number;
-				list.enqueue(Data(number));
-				break;
-
-			case '2':
 				{
-					Data item = list.dequeue();
-					cout << "Removed " << item << " from the list!" << endl;
+					int number;
+					cout << "Enter a number: ";
+					cin >> number;
+					Data input(number);
+					list.add(input);
 				}
 				break;
 
+			case '2':
+				cout << "Function not available!" << endl;
+				break;
+
 			case '3':
-				cout << "Here's the full CLL of numbers:"
+				cout << "Here's the full RBT of numbers:"
 						 << endl << list << endl;
 				break;
 

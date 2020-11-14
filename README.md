@@ -1,14 +1,14 @@
-# toy-code
-Some toy code for C++, for the PSU CS Tutors to practice on.
+# Demonstration Code
 
-## Usage
+A repository featuring demos of several features of the C++ language.
 
-#### Compilation:
-	**Buld and Run**
-	* `$` `make run`
+*Primarily* intended as a resource for the PSU CS Tutors, but may also be helpful to anyone else interested.
 
-	**Clean temporaries**
-	* `$` `make clean`
+***
 
-#### Run
-	* `$` `./toy-code`
+# Demo Programs:
+
+* [CLL](/cll): An implemntation of a CLL data structure
+* [dynamic-binding](/dynamic-binding): An implemntation of dynamic binding
+* [operator-overloading](/operator-overloading): An implementation of operator overloading
+* [templates](/templates): An example of using templates and smart pointers
